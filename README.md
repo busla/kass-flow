@@ -15,7 +15,7 @@ Helper for the [KASS](https://www.kass.is/) payment gateway. Written for python 
 ```python
 from kass_flow import kass
 
-kass_token = "some-token
+kass_token = "some-token"
 kass_url = "https://api.kass.is/v1/payments"
 instance = kass.KassBilling(kass_token, kass_url)
 
