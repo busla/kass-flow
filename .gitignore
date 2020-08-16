@@ -4,3 +4,4 @@ __pycache__
 .mypy_cache
 kass_flow.egg-info
 .venv
+venv
