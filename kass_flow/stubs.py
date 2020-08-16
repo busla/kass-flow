@@ -14,7 +14,6 @@ KassRequestPaymentDict = TypedDict(
     },
 )
 
-
 KassCallbackPaymentDict = TypedDict(
     "KassCallbackPaymentDict",
     {

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "kass-flow"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Jón Levy <nonni@nonni.cc>"]
 license = "MIT"
 description = "Library to manage payments using the KASS API"

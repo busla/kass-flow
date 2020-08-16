@@ -8,7 +8,7 @@ import requests
 from requests.exceptions import Timeout
 from requests.auth import HTTPBasicAuth
 from .exceptions import KassResponseDataError, KassResponseTimeoutError
-from .types import (
+from .stubs import (
     KassCallbackPaymentDict,
     KassPaymentResponseDict,
     KassRequestPaymentDict,
