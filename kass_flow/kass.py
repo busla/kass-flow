@@ -1,4 +1,4 @@
-from typing import TypedDict, Union, Any, Dict, Tuple
+from typing import TypedDict, Union, Any, Dict, Tuple, Literal, Type, Optional
 import logging
 import hmac
 from json import JSONDecodeError
@@ -52,6 +52,36 @@ KassCallbackPaymentDict = TypedDict(
     },
 )
 
+KassErrorCodes = Literal[
+    "merchant_not_found",
+    "merchant_account_locked",
+    "merchant_signature_incorrect",
+    "recipient_not_found",
+    "merchant_cannot_be_recipient",
+    "payment_not_found",
+    "payment_exceeds_limits",
+    "invalid_data",
+    "system_error",
+]
+
+KassErrorDict = TypedDict(
+    "KassErrorDict",
+    {"success": Literal[False], "code": str, "key": KassErrorCodes, "message": str},
+)
+KassSuccessDict = TypedDict(
+    "KassSuccessDict", {"success": Literal[True], "id": str, "created": int}
+)
+KassPaymentResponseDict = TypedDict(
+    "KassPaymentResponseDict",
+    {"success": KassSuccessDict, "error": Optional[KassErrorDict]},
+)
+
+
+KassFlowResponseDict = TypedDict(
+    "KassFlowResponseDict",
+    {"submitted": KassRequestPaymentDict, "recieved": KassPaymentResponseDict},
+)
+
 
 class KassBillingBase(ABC):
     def __init__(self, kass_token: str, kass_url: str):
@@ -88,7 +118,7 @@ class KassBillingBase(ABC):
         self, payload: KassRequestPaymentDict
     ) -> Tuple[Dict[str, Any], bool]:
         try:
-            res = requests.post(
+            res: KassPaymentResponseDict = requests.post(
                 self.kass_url,
                 json=payload,
                 auth=HTTPBasicAuth(self.kass_token, ""),

@@ -42,3 +42,11 @@ poetry config virtualenvs.create false
 poetry install
 pytest tests
 ```
+
+If you are using VSCode for development there is a `.vscode/settings.example.json` for sensible defaults. Since mypy is used you need to install the `mypyls` language server.
+
+```
+poetry install "https://github.com/matangover/mypyls/archive/master.zip#egg=mypyls[default-mypy]"
+# or
+pip install "https://github.com/matangover/mypyls/archive/master.zip#egg=mypyls[default-mypy]"
+```
