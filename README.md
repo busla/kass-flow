@@ -18,7 +18,7 @@ This module is not affiliated with KASS.
 
 Here is a short guide to get you started.
 
-This will dispatch
+This will dispatch a payment to the KASS API.
 
 ```python
 from kass_flow import kass
