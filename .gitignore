@@ -3,3 +3,6 @@ __pycache__
 !.vscode/settings.example.json
 .pytest_cache
 .mypy_cache
+kass_flow.egg-info
+.venv
+venv

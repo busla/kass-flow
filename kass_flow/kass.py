@@ -165,9 +165,7 @@ class KassBillingBase(ABC):
         return signature
 
     def notify(
-        self,
-        email_address: Union[str, None] = None,
-        mobile_number: Union[str, None] = None,
+        self, email_address: Optional[str] = None, mobile_number: Optional[str] = None,
     ) -> Any:
         raise NotImplementedError
 
