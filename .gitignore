@@ -1,4 +1,5 @@
 __pycache__
 .vscode
+!.vscode/settings.example.json
 .pytest_cache
 .mypy_cache
