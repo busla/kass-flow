@@ -1,4 +1,4 @@
-from typing import TypedDict, Union, Any, Dict, Tuple
+from typing import TypedDict, Union, Any, Dict, Tuple, Optional
 import logging
 import hmac
 from json import JSONDecodeError
@@ -136,8 +136,8 @@ class KassBillingBase(ABC):
 
     def notify(
         self,
-        email_address: Union[str, None] = None,
-        mobile_number: Union[str, None] = None,
+        email_address: Optional[str] = None,
+        mobile_number: Optional[str] = None,
     ) -> Any:
         raise NotImplementedError
 
