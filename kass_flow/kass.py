@@ -22,7 +22,7 @@ class KassBillingBase(ABC):
         self.kass_token = kass_token
         self.kass_url = kass_url
         self.kass_request_timeout: int = 5
-        self._payment_token: str = ""
+        self._payment_token: Optional[str] = None
 
     @property
     def token(self) -> str:
