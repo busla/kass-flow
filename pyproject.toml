@@ -1,12 +1,11 @@
 [tool.poetry]
 name = "kass-flow"
-version = "0.1.1"
-description = "Send payments to the KASS mobile payment service"
+version = "0.2.0"
 authors = ["Jón Levy <nonni@nonni.cc>"]
 license = "MIT"
 description = "Library to manage payments using the KASS API"
 homepage = "https://github.com/busla/kass-flow"
-
+readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.8"
 requests = "^2.24.0"
