@@ -1,0 +1,14 @@
+{
+  "python.pythonPath": "path/to/python",
+  "files.watcherExclude": {
+    "**/__pycache__/**": true
+  },
+  "python.linting.enabled": true,
+  "python.linting.mypyEnabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.formatting.provider": "black",
+  "python.testing.pytestArgs": ["tests", "-v", "-s"],
+  "python.testing.unittestEnabled": false,
+  "python.testing.nosetestsEnabled": false,
+  "python.testing.pytestEnabled": true
+}
