@@ -54,5 +54,5 @@ def test_kass_signature(
 ) -> None:
     # instance = kass.KassBilling(get_kass_token_from_api_docs,)
     instance = kass_instance_with_token_from_api_docs
-    is_valid = instance.is_signature_valid(kass_callback_response, instance.token)
+    is_valid = instance.is_signature_valid(kass_callback_response)
     assert is_valid is True

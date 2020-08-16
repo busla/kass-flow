@@ -2,6 +2,10 @@
 
 Helper for the [KASS](https://www.kass.is/) payment gateway. Written for python 3.8.5 (probably works on versions >= 3.6).
 
+See the [KASS API docs](https://kass.github.io/api/) for more info.
+
+This module is not affiliated with KASS.
+
 ## TODO
 
 - [x] Create payment
@@ -36,6 +40,14 @@ payload: kass.KassRequestPaymentDict = {
 
 result, is_valid = instance.dispatch(payload)
 ```
+
+When the recipient cancels or pays the requested order KASS will send a callback to the `notify_url`, which you need to catch on your server and validate the signature included in the POST payload.
+
+```python
+is_valid = instance.is_signature_valid(payload)
+```
+
+The payload can now be processed.
 
 ## Development
 

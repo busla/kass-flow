@@ -28,7 +28,8 @@ class KassBillingBase(ABC):
     def token(self) -> str:
         return self._payment_token
 
-    def create_signature(self, data: KassCallbackPaymentDict, kass_token: str) -> str:
+    def create_signature(self, data: KassCallbackPaymentDict) -> str:
+
         msg = "{}&{}&{}&{}&{}&{}".format(
             data["payment_id"],
             data["transaction_id"],
@@ -38,14 +39,14 @@ class KassBillingBase(ABC):
             data["completed"],
         )
         signature = hmac.new(
-            bytes(kass_token, "utf-8"),
+            bytes(self.kass_token, "utf-8"),
             msg=bytes(msg, "utf-8"),
             digestmod=hashlib.sha256,
         ).hexdigest()
         return signature
 
-    def is_signature_valid(self, res: KassCallbackPaymentDict, kass_token: str) -> bool:
-        signature = self.create_signature(res, kass_token)
+    def is_signature_valid(self, res: KassCallbackPaymentDict) -> bool:
+        signature = self.create_signature(res)
         return signature == res["signature"]
 
     def _send_payment_request(
