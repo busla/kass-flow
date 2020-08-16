@@ -73,7 +73,7 @@ def kass_instance(get_kass_token_test: str, get_kass_url: str) -> kass.KassBilli
 
 @pytest.fixture  # type: ignore
 def kass_instance_with_token_from_api_docs(
-    get_kass_token_test: str,
+    get_kass_token_from_api_docs: str, get_kass_url: str
 ) -> kass.KassBilling:
     kass_token = get_kass_token_from_api_docs
     kass_url = get_kass_url
