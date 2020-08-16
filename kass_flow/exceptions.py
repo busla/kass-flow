@@ -9,7 +9,7 @@ class Error(Exception):
         value -- value to be printed
     """
 
-    def __init__(self, value: Any, message: Any) -> None:
+    def __init__(self, value: Any, message: str) -> None:
         self.message = message
         self.value = value
 
