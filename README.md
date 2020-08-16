@@ -12,14 +12,18 @@ Helper for the [KASS](https://www.kass.is/) payment gateway. Written for python 
 
 ## Usage
 
+Here is a short guide to get you started.
+
+This will dispatch
+
 ```python
 from kass_flow import kass
 
-kass_token = "some-token"
-kass_url = "https://api.kass.is/v1/payments"
+kass_token: str = "some-token"
+kass_url: str = "https://api.kass.is/v1/payments"
 instance = kass.KassBilling(kass_token, kass_url)
 
-payload = {
+payload: kass.KassRequestPaymentDict = {
     "amount": 2199,
     "description": "Kass bolur",
     "image_url": "https://photos.kassapi.is/kass/kass-bolur.jpg",
