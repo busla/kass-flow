@@ -51,3 +51,7 @@ KassPaymentResponseDict = TypedDict(
     {"success": KassSuccessDict, "error": Optional[KassErrorDict]},
 )
 
+KassBillingPaymentResults = TypedDict(
+    "KassBillingPaymentResults",
+    {"submitted": KassRequestPaymentDict, "received": KassPaymentResponseDict},
+)

@@ -20,14 +20,21 @@ Here is a short guide to get you started.
 
 This will dispatch a payment to the KASS API.
 
+```sh
+poetry add kass-flow
+# or
+pip install kass-flow
+```
+
 ```python
-from kass_flow import kass
+from kass_flow.kass import KassBilling
+from kass_flow.interfaces import KassRequestPaymentDict
 
 kass_token: str = "some-token"
 kass_url: str = "https://api.kass.is/v1/payments"
-instance = kass.KassBilling(kass_token, kass_url)
+instance = KassBilling(kass_token, kass_url)
 
-payload: kass.KassRequestPaymentDict = {
+payload: KassRequestPaymentDict = {
     "amount": 2199,
     "description": "Kass bolur",
     "image_url": "https://photos.kassapi.is/kass/kass-bolur.jpg",

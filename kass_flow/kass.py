@@ -7,11 +7,12 @@ from abc import ABC, abstractmethod
 import requests
 from requests.exceptions import Timeout
 from requests.auth import HTTPBasicAuth
-from .exceptions import KassResponseDataError, KassResponseTimeoutError
-from .stubs import (
+from kass_flow.exceptions import KassResponseDataError, KassResponseTimeoutError
+from kass_flow.interfaces import (
     KassCallbackPaymentDict,
     KassPaymentResponseDict,
     KassRequestPaymentDict,
+    KassBillingPaymentResults,
 )
 
 logger = logging.getLogger("kass")
@@ -19,8 +20,8 @@ logger = logging.getLogger("kass")
 
 class KassBillingBase(ABC):
     def __init__(self, kass_token: str, kass_url: str):
-        self.kass_token = kass_token
-        self.kass_url = kass_url
+        self.kass_token: str = kass_token
+        self.kass_url: str = kass_url
         self.kass_request_timeout: int = 5
         self._payment_token: Optional[str] = None
 
@@ -51,7 +52,7 @@ class KassBillingBase(ABC):
 
     def _send_payment_request(
         self, payload: KassRequestPaymentDict
-    ) -> Tuple[Dict[str, Any], bool]:
+    ) -> Tuple[KassBillingPaymentResults, bool]:
         try:
             res: KassPaymentResponseDict = requests.post(
                 self.kass_url,
@@ -74,7 +75,9 @@ class KassBillingBase(ABC):
     def create_payment_token(self, payload: KassRequestPaymentDict) -> str:
         return ""
 
-    def dispatch(self, payload: KassRequestPaymentDict) -> Any:
+    def dispatch(
+        self, payload: KassRequestPaymentDict
+    ) -> Tuple[KassBillingPaymentResults, bool]:
         payment_token = self.create_payment_token(payload)
         invoice_data: KassRequestPaymentDict = {
             "order": payload["order"],
@@ -98,11 +101,6 @@ class KassBillingBase(ABC):
             digestmod=hashlib.sha256,
         ).hexdigest()
         return signature
-
-    def notify(
-        self, email_address: Optional[str] = None, mobile_number: Optional[str] = None,
-    ) -> Any:
-        raise NotImplementedError
 
 
 class KassBilling(KassBillingBase):
