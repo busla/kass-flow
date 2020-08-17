@@ -57,14 +57,13 @@ from kass_flow.kass import KassBilling
 from kass_flow.interfaces import KassRequestPaymentDict
 
 def some_view_that_handles_kass_callback(request):
-  payload = request.data
-  kass_token: str = "some-token"
-  kass_url: str = "https://api.kass.is/v1/payments"
-  instance = KassBilling(kass_token, kass_url)
+    payload = request.data
+    kass_token: str = "some-token"
+    kass_url: str = "https://api.kass.is/v1/payments"
+    instance = KassBilling(kass_token, kass_url)
 
-  is_valid = instance.is_signature_valid(payload)
-  if is_valid:
-    # process the payload.
+    if instance.is_signature_valid(payload):
+        # process the payload.
 ```
 
 ## Development
