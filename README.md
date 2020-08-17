@@ -48,13 +48,24 @@ payload: KassRequestPaymentDict = {
 result, is_valid = instance.dispatch(payload)
 ```
 
-When the recipient cancels or pays the requested order KASS will send a callback to the `notify_url`, which you need to catch on your server and validate the signature included in the POST payload.
+When the recipient cancels or pays the requested order KASS will send a callback to the `notify_url`, which you need to catch on your server and probably validate the signature that is included in the POST payload.
+
+At some point in time the user will pay/reject the requested order. Here is an example on how to validate the payload.
 
 ```python
-is_valid = instance.is_signature_valid(payload)
-```
+from kass_flow.kass import KassBilling
+from kass_flow.interfaces import KassRequestPaymentDict
 
-The payload can now be processed.
+def some_view_that_handles_kass_callback(request):
+  payload = request.data
+  kass_token: str = "some-token"
+  kass_url: str = "https://api.kass.is/v1/payments"
+  instance = KassBilling(kass_token, kass_url)
+
+  is_valid = instance.is_signature_valid(payload)
+  if is_valid:
+    # process the payload.
+```
 
 ## Development
 
