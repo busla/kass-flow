@@ -1,13 +1,15 @@
 [tool.poetry]
 name = "kass-flow"
-version = "0.2.4"
+version = "0.2.5"
 authors = ["Jón Levy <nonni@nonni.cc>"]
 license = "MIT"
 description = "Library to manage payments using the KASS API"
 homepage = "https://github.com/busla/kass-flow"
-readme = "README.md"
+readme = "README.rst"
+include = ["kass_flow/py.typed"]
+
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.6,<=3.8"
 requests = "^2.24.0"
 
 [tool.poetry.dev-dependencies]

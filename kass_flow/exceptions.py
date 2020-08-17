@@ -26,3 +26,6 @@ class KassResponseTimeoutError(Error):
 class KassResponseDataError(Error):
     pass
 
+
+class KassMissingTokenError(Error):
+    pass

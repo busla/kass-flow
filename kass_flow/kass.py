@@ -7,7 +7,11 @@ from abc import ABC, abstractmethod
 import requests
 from requests.exceptions import Timeout
 from requests.auth import HTTPBasicAuth
-from kass_flow.exceptions import KassResponseDataError, KassResponseTimeoutError
+from kass_flow.exceptions import (
+    KassResponseDataError,
+    KassResponseTimeoutError,
+    KassMissingTokenError,
+)
 from kass_flow.interfaces import (
     KassCallbackPaymentDict,
     KassPaymentResponseDict,
@@ -19,7 +23,15 @@ logger = logging.getLogger("kass")
 
 
 class KassBillingBase(ABC):
-    def __init__(self, kass_token: str, kass_url: str):
+    def __init__(
+        self,
+        kass_token: Optional[str] = None,
+        kass_url: str = "https://api.kass.is/v1/payments",
+    ):
+        if not kass_token:
+            raise KassMissingTokenError(
+                kass_token, f"Kass token cannot be {kass_token}"
+            )
         self.kass_token: str = kass_token
         self.kass_url: str = kass_url
         self.kass_request_timeout: int = 5
